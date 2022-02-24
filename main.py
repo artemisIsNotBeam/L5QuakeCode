@@ -11,9 +11,14 @@ width,height = map.size
 mid_width = width//2
 mid_height = height//2
 for idx,item in myData.iterrows():
+	#check for mag over 8
 	x = mid_width + item["Longitude"] / 10 * 32.25
 	y = mid_height - item["Latitude"] / 10 * 32.25
-	mapctx.pieslice([x - 16, y - 16, x + 16, y + 16], 240, 300, fill="blue")
+	mag = item["Magnitude"]
+	if mag >8:
+		mapctx.pieslice([x - 16, y - 16, x + 16, y + 16], 240, 300, fill="red")
+	else:
+		mapctx.pieslice([x - 16, y - 16, x + 16, y + 16], 240, 300, fill="blue")
 	
 '''
 myImage = Image.open("blankCanvas.png")
